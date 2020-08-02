@@ -1,0 +1,8 @@
+ports:
+  - port: 3000
+    onOpen: open-browser
+
+tasks:
+  - init: npm install
+  - command: npm run dev
+    name: Webpack dev server
