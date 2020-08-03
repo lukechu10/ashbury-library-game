@@ -4,9 +4,9 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-	"dev": "webpack-dev-server",
-	"prod": "webpack --mode production"
+    "test": "jest",
+    "dev": "webpack-dev-server",
+    "prod": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -18,14 +18,17 @@
     "url": "https://github.com/lukechu10/ashbury-library-game/issues"
   },
   "homepage": "https://github.com/lukechu10/ashbury-library-game#readme",
-  "dependencies": {
-    "ts-loader": "^8.0.1",
-    "typescript": "^3.9.7",
-    "webpack": "^4.44.1"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@types/jest": "^26.0.8",
     "fork-ts-checker-webpack-plugin": "^5.0.13",
     "html-webpack-plugin": "^4.3.0",
+    "jest": "^26.2.2",
+    "playwright": "^1.2.1",
+    "ts-jest": "^26.1.4",
+    "ts-loader": "^8.0.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   }

@@ -1,3 +1,5 @@
+image: gitpod/workspace-full-vnc # for playwright browser testing
+
 ports:
   - port: 3000
     onOpen: open-browser
