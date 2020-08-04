@@ -1,10 +1,15 @@
-const { chromium, Page } = require("playwright");
-let browser: any;
-let page: any;
+import { chromium, Browser, Page } from "playwright";
+let browser: Browser;
+let page: Page;
 
 beforeEach(async () => {
-	browser = await chromium.launch();
+	browser = await chromium.launch({
+		args: ['--no-sandbox'], // for use on https://gitpod.io
+		headless: false
+	});
+
 	page = await browser.newPage();
+	await page.goto('https://www.example.com/');
 });
 afterEach(async () => {
 	await page.close();
@@ -12,6 +17,5 @@ afterEach(async () => {
 });
 
 it('should work', async () => {
-	await page.goto('https://www.example.com/');
 	console.log(await page.title());
 });

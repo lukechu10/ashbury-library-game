@@ -12,6 +12,6 @@ RUN sudo apt-get update \
 	&& sudo rm -rf /var/lib/apt/lists/*
 
 USER gitpod
-RUN npm install
+RUN PLAYWRIGHT_BROWSERS_PATH=0 npm install
 
 USER root

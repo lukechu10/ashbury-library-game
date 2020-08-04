@@ -1,0 +1,35 @@
+.btn {
+	border: solid var(--color-button) 3px;
+	border-radius: 5px;
+
+	margin: 10px;
+	width: 300px;
+	
+	font-size: 39px;
+	text-align: center;
+
+	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+	&-primary {
+		background-color: rgba(83, 94, 168, 1);
+		color: white;
+	}
+
+	&-secondary {
+		background-color: transparent;
+		color: var(--color-button);
+	}
+
+	& > * {
+		margin: 8px;
+	}
+
+	// alignment
+	&-center-align {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}

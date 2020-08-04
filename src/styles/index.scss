@@ -1,0 +1,67 @@
+@import "./buttons.scss";
+
+:root {
+	// Fonts
+	--default-font-family: Berlin Sans FB;
+	
+
+	// Colors
+	--color-dark-accent: rgba(104, 151, 152, 1);
+	--color-light-accent: rgba(168, 206, 198, 1);
+	--color-button: rgba(83, 94, 168, 1);
+}
+
+body {
+	font-family: var(--default-font-family);
+	background-color: var(--color-light-accent);
+	user-select: none;
+}
+
+#home-title-text {
+	font-size: 147px;
+	text-align: center;
+	margin-top: 63px; // distance to top of viewport
+	color: var(--color-dark-accent);
+}
+
+#start-btn {
+	top: 287px;
+}
+
+#leaderboards-btn {
+	top: 481px;
+}
+
+// 3 circles background
+.bg-circle {
+	position: absolute;
+	display: inline-block;
+
+	z-index: -1; // background
+	border-radius: 50%; // circle
+
+	top: 318px;
+	height: 132px;
+	width: 132px;
+
+	background-color: var(--color-dark-accent);
+}
+
+#circle {
+	&-1 {
+		left: 28px;
+	}
+	&-2 {
+		left: 160px;
+	}
+	&-3 {
+		left: 292px;
+	}
+}
+
+// hiboutheque logo
+#owl-img {
+	position: absolute;
+	top: 541px;
+	left: 39px;
+}
