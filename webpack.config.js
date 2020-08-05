@@ -8,8 +8,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
 	context: __dirname,
 	entry: [
-		'webpack-dev-server/client?http://localhost:8080',
-		'webpack/hot/only-dev-server',
 		'./src/index.ts'
 	],
 	output: {
@@ -49,7 +47,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new webpack.HotModuleReplacementPlugin(),
 		new HtmlWebpackPlugin({
 			inject: 'head',
 			template: path.join(__dirname, 'src/views/index.pug')
