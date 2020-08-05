@@ -18,7 +18,13 @@ body {
 }
 
 #home-title-text {
-	font-size: 147px;
+	@media (min-width: 900px) {
+		font-size: 147px;
+	}
+	@media (max-width: 900px) {
+		font-size: 100px;
+	}
+	
 	text-align: center;
 	margin-top: 63px; // distance to top of viewport
 	color: var(--color-dark-accent);
