@@ -1,3 +1,7 @@
+:root {
+	--color-button: rgb(83, 94, 168);
+}
+
 .btn {
 	border: solid var(--color-button) 3px;
 	border-radius: 5px;
@@ -7,19 +11,36 @@
 	
 	font-size: 39px;
 	text-align: center;
-
-	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
-
 	text-decoration-line: none; // override default link style
 
+	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+	
 	&-primary {
-		background-color: rgba(83, 94, 168, 1);
+		background-color: var(--color-button);
 		color: white;
 	}
 
 	&-secondary {
 		background-color: transparent;
 		color: var(--color-button);
+	}
+
+	// circular button with back icon
+	&-back {
+		background-color: var(--color-button);
+		border-radius: 50%; // circular button
+
+		width: 60px;
+		height: 60px;
+
+		margin: 0;
+		display: inline-block;
+
+		// back arrow inside button
+		& > i {
+			color: white;
+			margin-right: 12px;
+		}
 	}
 
 	& > * {

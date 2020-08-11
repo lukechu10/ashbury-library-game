@@ -8,19 +8,22 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
-function HtmlTemplateFactory(templatePath) {
+function HtmlTemplateFactory(templatePath, chunks) {
 	return new HtmlWebpackPlugin({
 		inject: 'head',
 		template: path.join(__dirname, templatePath),
-		filename: path.parse(templatePath).name + '.html'
+		filename: path.parse(templatePath).name + '.html',
+		chunks: [...chunks, 'global'] // add 'global' chunk to all views
 	});
 }
 
 module.exports = {
 	context: __dirname,
-	entry: [
-		'./src/index.ts'
-	],
+	entry: {
+		global: './src/global.ts', // included in all views
+		main: './src/scripts/index.ts', // index.html
+		gameSelection: './src/scripts/GameSelection.ts' // game-selection.html
+	},
 	devtool: 'eval-cheap-module-source-map',
 	output: {
 		filename: '[name].bundle.js',
@@ -60,10 +63,16 @@ module.exports = {
 	},
 	plugins: [
 		...[
-			'src/views/index.pug',
-			'src/views/routes/game-selection.pug'
+			{
+				templatePath: 'src/views/index.pug',
+				chunks: ['main']
+			},
+			{
+				templatePath: 'src/views/routes/game-selection.pug',
+				chunks: ['gameSelection']
+			}
 		].map(
-			path => HtmlTemplateFactory(path)
+			view => HtmlTemplateFactory(view.templatePath, view.chunks)
 		),
 		new ForkTsCheckerWebpackPlugin(),
 		new CopyPlugin({

@@ -1,5 +1,7 @@
-// styles
-import './styles/index.scss';
+// included in all views
+
+// global styles
+import './styles/global.scss';
 
 // polyfills
 import 'whatwg-fetch'; // window.fetch
