@@ -22,10 +22,12 @@
   },
   "homepage": "https://github.com/lukechu10/ashbury-library-game#readme",
   "dependencies": {
+    "turbolinks": "^5.2.0",
     "whatwg-fetch": "^3.4.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.8",
+    "@types/turbolinks": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
     "copy-webpack-plugin": "^6.0.3",

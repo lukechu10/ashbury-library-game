@@ -4,11 +4,10 @@ import './styles/index.scss';
 // polyfills
 import 'whatwg-fetch'; // window.fetch
 
-// logic
-import { Router } from './scripts/router'; // routing logic
+// turbolinks
+import * as Turbolinks from 'turbolinks';
+Turbolinks.start();
 
 document.addEventListener('DOMContentLoaded', () => {
-	// attach routing event handlers
-	Router.attachEventHandlers('a');
 	console.log('Event: DOMContentLoaded');
 });
