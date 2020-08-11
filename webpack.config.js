@@ -1,21 +1,32 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/no-require-imports */
+/* eslint-disable no-undef */
 const path = require('path');
 
-const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+
+function HtmlTemplateFactory(templatePath) {
+	return new HtmlWebpackPlugin({
+		inject: 'head',
+		template: path.join(__dirname, templatePath),
+		filename: path.parse(templatePath).name + '.html'
+	});
+}
 
 module.exports = {
 	context: __dirname,
 	entry: [
 		'./src/index.ts'
 	],
+	devtool: 'eval-cheap-module-source-map',
 	output: {
-		filename: "[name].bundle.js",
+		filename: '[name].bundle.js',
 		path: path.resolve(__dirname, 'dist'),
 	},
 	resolve: {
-		extensions: [".ts", ".tsx", ".js"],
+		extensions: ['.ts', '.tsx', '.js'],
 	},
 	module: {
 		rules: [
@@ -47,10 +58,12 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			inject: 'head',
-			template: path.join(__dirname, 'src/views/index.pug')
-		}),
+		...[
+			'src/views/index.pug',
+			'src/views/routes/game-selection.pug'
+		].map(
+			path => HtmlTemplateFactory(path)
+		),
 		new ForkTsCheckerWebpackPlugin(),
 		new CopyPlugin({
 			patterns: [
