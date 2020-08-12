@@ -1,6 +1,8 @@
-body {
-	background-color: var(--color-light-accent);
-}
+/*
+z-index 0 - #content
+z-index 1 - background graphics and @owl-img
+z-index 2 - text and ui elements
+*/
 
 #home-title-text {
 	@media (min-width: 900px) {
@@ -11,16 +13,21 @@ body {
 	}
 	
 	text-align: center;
-	margin-top: 63px; // distance to top of viewport
+	padding-top: 63px; // distance to top of viewport
+	margin-top: 0;
 	color: var(--color-dark-accent);
+
+	z-index: 2;
 }
 
 #start-btn {
 	top: 287px;
+	z-index: 2;
 }
 
 #leaderboards-btn {
 	top: 481px;
+	z-index: 2;
 }
 
 // 3 circles background
@@ -28,7 +35,7 @@ body {
 	position: absolute;
 	display: inline-block;
 
-	z-index: -1; // background
+	z-index: 1; // background
 	border-radius: 50%; // circle
 
 	top: 318px;
@@ -56,5 +63,5 @@ body {
 	top: 541px;
 	left: 39px;
 
-	z-index: -1; // background
+	z-index: 1; // background
 }

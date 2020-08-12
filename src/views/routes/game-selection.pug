@@ -1,5 +1,20 @@
 extends ../layout
 block content
-    .title-area
-        a.btn.btn-back(href="/") #[i.fas.fa-chevron-left]
-        p.title-content Sélectionner un mode de jeu
+    #content
+        .title-area
+            a.btn.btn-back(href="/") #[i.fas.fa-chevron-left]
+            p.title-content Sélectionner un mode de jeu
+        table#selection-table
+            tbody
+                tr
+                    td Recommendé CE2 - CM2
+                    td Recommendé CE2 - CM2
+                    td Recommendé CE2 - CM2
+                tr
+                    td #[img(src="/images/card-triage.svg")]
+                    td #[img(src="/images/card-identification.svg")]
+                    td #[img(src="/images/card-match.svg")]
+                tr#selection-descriptions
+                    td Triage
+                    td Identification (WIP)
+                    td Match (WIP)

@@ -1,4 +1,4 @@
 // entrypoint for game-selection.html
 
 // styles
-import '../styles/title-area.scss';
+import '../styles/game-selection.scss';

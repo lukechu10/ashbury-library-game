@@ -1,0 +1,16 @@
+@import "./title-area.scss";
+
+#selection-table {
+    border-spacing: 10px;
+    margin: auto;
+    & td,th {
+        text-align: center;
+    }
+}
+
+#selection-descriptions {
+    margin-top: 0;
+    color: rgb(112, 112, 112);
+    font-size: 35px;
+    transform: translate(0, -10px); // offset border-spacing
+}

@@ -7,6 +7,7 @@ const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 function HtmlTemplateFactory(templatePath, chunks) {
 	return new HtmlWebpackPlugin({
@@ -54,7 +55,12 @@ module.exports = {
 			{
 				test: /\.s[ac]ss$/i,
 				use: [
-					'style-loader',
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {
+							publicPath: '/styles/'
+						}
+					},
 					'css-loader',
 					'sass-loader'
 				],
@@ -79,13 +85,15 @@ module.exports = {
 			patterns: [
 				{ from: 'src/images', to: 'images' }
 			]
-		})
+		}),
+		new MiniCssExtractPlugin()
 	],
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
 		port: 3000,
 		host: '0.0.0.0',
 		allowedHosts: ['localhost', '.gitpod.io'],
-		liveReload: true
+		liveReload: true,
+		transportMode: 'ws'
 	}
 };

@@ -1,14 +1,15 @@
 extends layout
 block content
-	p#home-title-text Library Game
-	a#start-btn.btn.btn-primary.btn-center-align(href="/game-selection.html")
-		p Commencer
-	#leaderboards-btn.btn.btn-secondary.btn-center-align
-		p Classements
+	#content(style="background-color: var(--color-light-accent);")
+		p#home-title-text Library Game
+		a#start-btn.btn.btn-primary.btn-center-align(href="/game-selection.html")
+			p Commencer
+		#leaderboards-btn.btn.btn-secondary.btn-center-align
+			p Classements
 
-	//- circles
-	.bg-circle#circle-1
-	.bg-circle#circle-2
-	.bg-circle#circle-3
+		//- circles
+		.bg-circle#circle-1
+		.bg-circle#circle-2
+		.bg-circle#circle-3
 
-	img#owl-img(src="/images/hiboutheque-logo.png")
+		img#owl-img(src="/images/hiboutheque-logo.png")
