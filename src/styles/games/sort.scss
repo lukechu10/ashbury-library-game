@@ -1,0 +1,28 @@
+#validate-btn {
+    position: fixed;
+    bottom: 46px;
+    right: 72px;
+}
+
+#time-counter,#score-counter {
+    position: fixed;
+    font-size: 55px;
+    line-height: 60px;
+    top: 36px;
+    color: rgb(112, 112, 112);
+}
+
+#time-counter {
+    left: 42px;
+}
+
+#score-counter {
+    left: 343px;
+}
+
+#sort-canvas {
+    position: fixed;
+    width: 100%;
+    top: 96px;
+    height: calc(100vh - 96px);
+}

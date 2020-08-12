@@ -23,7 +23,9 @@ module.exports = {
 	entry: {
 		global: './src/global.ts', // included in all views
 		main: './src/scripts/index.ts', // index.html
-		gameSelection: './src/scripts/GameSelection.ts' // game-selection.html
+		gameSelection: './src/scripts/GameSelection.ts', // game-selection.html
+		// games
+		gameSort: './src/scripts/games/Sort.ts'
 	},
 	devtool: 'eval-cheap-module-source-map',
 	output: {
@@ -76,6 +78,10 @@ module.exports = {
 			{
 				templatePath: 'src/views/routes/game-selection.pug',
 				chunks: ['gameSelection']
+			},
+			{
+				templatePath: 'src/views/routes/games/sort.pug',
+				chunks: ['gameSort']
 			}
 		].map(
 			view => HtmlTemplateFactory(view.templatePath, view.chunks)
