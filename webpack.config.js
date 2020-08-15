@@ -14,7 +14,8 @@ function HtmlTemplateFactory(templatePath, chunks) {
 		inject: 'head',
 		template: path.join(__dirname, templatePath),
 		filename: path.parse(templatePath).name + '.html',
-		chunks: [...chunks, 'global'] // add 'global' chunk to all views
+		chunks: [...chunks, 'global'], // add 'global' chunk to all views
+		// scriptLoading: 'defer'
 	});
 }
 
@@ -33,7 +34,7 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist'),
 	},
 	resolve: {
-		extensions: ['.ts', '.tsx', '.js'],
+		extensions: ['.ts', '.tsx', '.js', '.json'],
 	},
 	module: {
 		rules: [
@@ -101,5 +102,28 @@ module.exports = {
 		allowedHosts: ['localhost', '.gitpod.io'],
 		liveReload: true,
 		transportMode: 'ws'
+	},
+	optimization: {
+		splitChunks: {
+			chunks: 'all',
+			minSize: 20000,
+			maxSize: 0,
+			minChunks: 1,
+			maxAsyncRequests: 30,
+			maxInitialRequests: 30,
+			automaticNameDelimiter: '~',
+			enforceSizeThreshold: 50000,
+			cacheGroups: {
+				defaultVendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10
+				},
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true
+				}
+			}
+		}
 	}
 };

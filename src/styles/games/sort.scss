@@ -22,7 +22,9 @@
 
 #sort-canvas {
     position: fixed;
+    top: 0;
     width: 100%;
-    top: 96px;
-    height: calc(100vh - 96px);
+    height: 100%;
+
+    z-index: -1;
 }

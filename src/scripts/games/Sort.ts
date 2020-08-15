@@ -5,4 +5,12 @@ import '../../styles/games/sort.scss';
 
 import data from '../../model/mock.json';
 
-console.log(data[0].COTE);
+async function ready(): Promise<void> {
+	if (location.pathname === '/sort.html') {
+		// on sort page
+		const { SortCanvas } = await import('./SortCanvas');
+		new SortCanvas();
+	}
+}
+
+document.addEventListener('turbolinks:load', ready);
