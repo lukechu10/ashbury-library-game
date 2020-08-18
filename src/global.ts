@@ -2,12 +2,12 @@
 
 // global styles
 import './styles/global.scss';
-
-// polyfills
-import 'whatwg-fetch'; // window.fetch
-
 // turbolinks
 import * as Turbolinks from 'turbolinks';
+// polyfills
+import 'whatwg-fetch'; // window.fetch
+import '@webcomponents/shadydom'; // shadow dom
+
 Turbolinks.start();
 
 document.addEventListener('DOMContentLoaded', () => {

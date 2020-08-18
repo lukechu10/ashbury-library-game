@@ -1,6 +1,5 @@
+import { css, CSSResult, customElement, html, LitElement, query, TemplateResult } from 'lit-element';
 import * as PIXI from 'pixi.js';
-import { LitElement, TemplateResult, html, customElement, css, CSSResult, query } from 'lit-element';
-import '@webcomponents/shadydom';
 
 @customElement('sort-canvas')
 export class SortCanvas extends LitElement {
@@ -8,10 +7,11 @@ export class SortCanvas extends LitElement {
 	private canvas!: HTMLCanvasElement;
 
 	private app!: PIXI.Application;
-	private loader!: PIXI.Loader;
-	private resources!: PIXI.IResourceDictionary;
 	private stage!: PIXI.Container;
+	private loader = PIXI.Loader.shared;
 	private interactionManager!: PIXI.InteractionManager;
+
+	private static assetsLoaded = false; // true if assets have already been loaded
 
 	public static get styles(): CSSResult {
 		return css`
@@ -45,25 +45,26 @@ export class SortCanvas extends LitElement {
 
 		this.app.renderer.backgroundColor = 0xffffff; // set white background
 
-		await this.loadAssets();
-
-		this.setup();
+		//#region load assets
+		if (!SortCanvas.assetsLoaded) {
+			this.loader
+				.add('woodBg', '/images/games/sort/wood-bg.png')
+				.load(() => {
+					SortCanvas.assetsLoaded = true; // update assets loaded state
+					this.setup();
+				});
+		}
+		else {
+			this.setup();
+		}
+		//#endregion
 	}
 
-	private loadAssets(): Promise<void> {
-		return new Promise<void>(resolve => {
-			this.loader = new PIXI.Loader();
-			this.loader.add('/images/games/sort/wood-bg.png').load(() => resolve());
-		});
-	}
-
-	private setup(): void {
-		this.resources = this.loader.resources;
-
-		const sprite = new PIXI.TilingSprite(
-			this.resources['/images/games/sort/wood-bg.png'].texture, this.app.view.width, 205);
-		sprite.position.y = 96;
+	private setup(): void {		
+		const woodBgSprite = new PIXI.TilingSprite(
+			this.loader.resources.woodBg.texture, this.app.view.width, 205);
+		woodBgSprite.position.y = 96;
 			
-		this.stage.addChild(sprite);
+		this.stage.addChild(woodBgSprite);
 	} 
 }
