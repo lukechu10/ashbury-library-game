@@ -1,32 +1,53 @@
 import * as PIXI from 'pixi.js';
+import { LitElement, TemplateResult, html, customElement, css, CSSResult, query } from 'lit-element';
+import '@webcomponents/shadydom';
 
-export class SortCanvas {
-	private app: PIXI.Application;
+@customElement('sort-canvas')
+export class SortCanvas extends LitElement {
+	@query('#sort-canvas')
+	private canvas!: HTMLCanvasElement;
+
+	private app!: PIXI.Application;
 	private loader!: PIXI.Loader;
 	private resources!: PIXI.IResourceDictionary;
-	private stage: PIXI.Container;
+	private stage!: PIXI.Container;
+	private interactionManager!: PIXI.InteractionManager;
 
-	/**
-	 * Setup #sort-canvas element
-	 */
-	public constructor() {
-		const canvas = (document.querySelector('#sort-canvas') as HTMLCanvasElement);
+	public static get styles(): CSSResult {
+		return css`
+			#sort-canvas {
+				position: fixed;
+				top: 0;
+				width: 100%;
+				height: 100%;
+			
+				z-index: -1;
+			}
+		`;
+	}
+
+	public render(): TemplateResult {
+		return html`
+			<canvas id="sort-canvas"></canvas>
+		`;
+	}
+
+	public async firstUpdated(): Promise<void> {
 		const type = PIXI.utils.isWebGLSupported() ? 'webgl' : 'canvas';
 		PIXI.utils.sayHello(type);
 
 		this.app = new PIXI.Application({
-			view: canvas,
+			view: this.canvas,
 			resolution: 1
 		});
 		this.stage = this.app.stage; // add alias
+		this.interactionManager = new PIXI.InteractionManager(this.app.renderer);
 
 		this.app.renderer.backgroundColor = 0xffffff; // set white background
 
-		(async (): Promise<void> => {
-			await this.loadAssets();
+		await this.loadAssets();
 
-			this.setup();
-		})();
+		this.setup();
 	}
 
 	private loadAssets(): Promise<void> {
@@ -44,7 +65,5 @@ export class SortCanvas {
 		sprite.position.y = 96;
 			
 		this.stage.addChild(sprite);
-
-		console.log(this);
-	}
+	} 
 }
