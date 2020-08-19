@@ -6,7 +6,7 @@ import './styles/global.scss';
 import * as Turbolinks from 'turbolinks';
 // polyfills
 import 'whatwg-fetch'; // window.fetch
-import '@webcomponents/shadydom'; // shadow dom
+import '@webcomponents/webcomponentsjs'; // shadydom and shadycss
 
 Turbolinks.start();
 

@@ -1,4 +1,4 @@
-import { css, CSSResult, customElement, html, LitElement, query, TemplateResult } from 'lit-element';
+import { css, customElement, html, LitElement, query, TemplateResult } from 'lit-element';
 import * as PIXI from 'pixi.js';
 
 @customElement('sort-canvas')
@@ -13,18 +13,16 @@ export class SortCanvas extends LitElement {
 
 	private static assetsLoaded = false; // true if assets have already been loaded
 
-	public static get styles(): CSSResult {
-		return css`
-			#sort-canvas {
-				position: fixed;
-				top: 0;
-				width: 100%;
-				height: 100%;
-			
-				z-index: -1;
-			}
-		`;
-	}
+	public static styles = css`
+		#sort-canvas {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		
+			z-index: -1;
+		}
+	`;
 
 	public render(): TemplateResult {
 		return html`
@@ -66,5 +64,7 @@ export class SortCanvas extends LitElement {
 		woodBgSprite.position.y = 96;
 			
 		this.stage.addChild(woodBgSprite);
-	} 
+	}
+
+
 }
