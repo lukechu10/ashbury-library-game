@@ -1,70 +1,56 @@
-import { css, customElement, html, LitElement, query, TemplateResult } from 'lit-element';
 import * as PIXI from 'pixi.js';
 
-@customElement('sort-canvas')
-export class SortCanvas extends LitElement {
-	@query('#sort-canvas')
-	private canvas!: HTMLCanvasElement;
+const loader = PIXI.Loader.shared;
+const app = new PIXI.Application({
+    view: document.querySelector<HTMLCanvasElement>('#sort-canvas')!
+});
+app.renderer.backgroundColor = 0xffffff; // white
 
-	private app!: PIXI.Application;
-	private stage!: PIXI.Container;
-	private loader = PIXI.Loader.shared;
-	private interactionManager!: PIXI.InteractionManager;
+const stage = app.stage;
+const textures: any = {};
+const sprites: any = {};
 
-	private static assetsLoaded = false; // true if assets have already been loaded
+function createBookCover(): PIXI.Sprite {
+    const bookCoverSprite = new PIXI.Sprite(textures.bookCover);
 
-	public static styles = css`
-		#sort-canvas {
-			position: fixed;
-			top: 0;
-			width: 100%;
-			height: 100%;
-		
-			z-index: -1;
-		}
-	`;
+    let data: PIXI.InteractionData | null; // closure data
+    let dragging: boolean = false; // closure data
 
-	public render(): TemplateResult {
-		return html`
-			<canvas id="sort-canvas"></canvas>
-		`;
-	}
+    bookCoverSprite.interactive = true;
+    bookCoverSprite.anchor.set(0.5);
 
-	public async firstUpdated(): Promise<void> {
-		const type = PIXI.utils.isWebGLSupported() ? 'webgl' : 'canvas';
-		PIXI.utils.sayHello(type);
+    bookCoverSprite.on('pointerdown', (event: PIXI.InteractionEvent) => {
+        data = event.data;
+        bookCoverSprite.alpha = 0.5;
+        dragging = true;
+    }).on('pointerup', () => {
+        data = null;
+        bookCoverSprite.alpha = 1;
+        dragging = false;
+    }).on('pointermove', () => {
+        if (dragging) {
+            const newPosition = data!.getLocalPosition(bookCoverSprite.parent);
+            bookCoverSprite.position.set(newPosition.x, newPosition.y);
+        }
+    });
 
-		this.app = new PIXI.Application({
-			view: this.canvas,
-			resolution: 1
-		});
-		this.stage = this.app.stage; // add alias
-		this.interactionManager = new PIXI.InteractionManager(this.app.renderer);
-
-		this.app.renderer.backgroundColor = 0xffffff; // set white background
-
-		//#region load assets
-		if (!SortCanvas.assetsLoaded) {
-			this.loader
-				.add('woodBg', '/images/games/sort/wood-bg.png')
-				.load(() => {
-					SortCanvas.assetsLoaded = true; // update assets loaded state
-					this.setup();
-				});
-		}
-		else {
-			this.setup();
-		}
-		//#endregion
-	}
-
-	private setup(): void {		
-		const woodBgSprite = new PIXI.TilingSprite(
-			this.loader.resources.woodBg.texture, this.app.view.width, 205);
-		woodBgSprite.position.y = 96;
-			
-		this.stage.addChild(woodBgSprite);
-	}
-
-
+    stage.addChild(bookCoverSprite);
+    return bookCoverSprite;
 }
+
+function setup(): void {
+    textures.woodBackground = loader.resources.woodBackground.texture;
+    textures.bookCover = loader.resources.bookCover.texture;
+
+    sprites.woodBackground = new PIXI.TilingSprite(textures.woodBackground, app.view.width, 205);
+    sprites.woodBackground.y = 96;
+
+    stage.addChild(sprites.woodBackground);
+
+    createBookCover();
+}
+
+loader
+    .add('woodBackground', '/images/games/sort/woodBackground.png')
+    .add('bookCover', '/images/games/sort/bookCover.gif')
+    .load(setup);

@@ -8,7 +8,7 @@ import * as Turbolinks from 'turbolinks';
 import 'whatwg-fetch'; // window.fetch
 import '@webcomponents/webcomponentsjs'; // shadydom and shadycss
 
-Turbolinks.start();
+// Turbolinks.start();
 
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('Event: DOMContentLoaded');

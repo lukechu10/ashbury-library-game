@@ -15,7 +15,7 @@ function HtmlTemplateFactory(templatePath, chunks) {
 		template: path.join(__dirname, templatePath),
 		filename: path.parse(templatePath).name + '.html',
 		chunks: [...chunks, 'global'], // add 'global' chunk to all views
-		// scriptLoading: 'defer'
+		scriptLoading: 'defer'
 	});
 }
 
