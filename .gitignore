@@ -47,6 +47,9 @@ jspm_packages/
 # Optional npm cache directory
 .npm
 
+# Yarn cache directory
+.yarn
+
 # Optional eslint cache
 .eslintcache
 
