@@ -1,6 +1,6 @@
 import Router from '@koa/router';
+import { getRandomBooks, BookType } from '../model/model';
 
-import mockData from '../model/mock.json';
 
 const router = new Router();
 
@@ -23,8 +23,7 @@ function getImageUrl(book: BookData): Book {
 		imageUrl = `${BASE_URL}A_${year}/M_${month}/${imageData}`;
 	}
 	else {
-		console.log(imageData);
-		throw new Error(); // should be unreachable
+		throw new Error(`Could not get image url for ${imageData}`); // should be unreachable
 	}
 
 	return { ...book, imageUrl };
@@ -32,10 +31,23 @@ function getImageUrl(book: BookData): Book {
 
 router.get('get', async ctx => {
 	const amount: number = ctx.query.amount;
-	if (amount === undefined) ctx.throw(400, 'amount required');
+	if (amount === undefined) ctx.throw(400, 'invalid amount query');
 
-	const res = mockData.slice(0, amount).map(getImageUrl);
-	ctx.body = res;
+	const bookTypeStr: string = ctx.query.bookType;
+	if (bookTypeStr === undefined) ctx.throw(400, 'invalid bookType query');
+	else if (bookTypeStr !== 'alpha' && bookTypeStr !== 'dewey') ctx.throw(400, 'invalid bookType query');
+
+	const bookType: BookType = bookTypeStr === 'alpha' ? BookType.Alpha : BookType.DeweyDecimal;
+	
+	try {
+		const res = (await getRandomBooks(bookType, amount)).map(getImageUrl);
+		ctx.body = res;
+	}
+	catch(err) {
+		if (err.message === 'there are not enough books to satisfy amount') {
+			ctx.throw(400, 'amount query exceeds the number of books');
+		}
+	}
 });
 
 export { router };

@@ -6,6 +6,10 @@ interface BookData {
     DOCUMENT_ID: string;
     TITRE: string;
     SUPPORT: string;
+    /**
+     * Sticker
+     */
+    COTE: string;
     IMAGE: string;
 }
 
