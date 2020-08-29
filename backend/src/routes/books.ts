@@ -10,7 +10,7 @@ function getImageUrl(book: BookData): Book {
 	const imageData = book.IMAGE;
 	let imageUrl: string;
 
-	if (imageData.match(/[0-9]{15}\.[a-z]*/)) { // e.g. 200804011130508.jpg
+	if (imageData.match(/[0-9]{14,15}\.[a-z]*/)) { // e.g. 200804011130508.jpg
 		imageUrl = `${BASE_URL}A_${imageData.slice(0, 4)}/M_${imageData.slice(4, 6)}/${imageData}`;
 	}
 	else if (imageData.match(/[a-z0-9]{1,8}\.[a-z]*/)) { // e.g. 80116005.jpg or tob165.jpg
