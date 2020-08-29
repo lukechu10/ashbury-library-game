@@ -22,15 +22,22 @@ const textures: any = {};
 const sprites: any = {};
 
 async function getBooks(): Promise<Book[]> {
-	const apiRes = await fetch(`${API_URL_BASE}/books/get?amount=3&bookType=alpha`);
+	const apiRes = await fetch(`${API_URL_BASE}/books/get?amount=5&bookType=alpha`);
 	const books: Book[] = await apiRes.json();
 
 	return books;
 }
 
-async function createBookCover(book: Book): Promise<void> {
+/**
+ * Creates a BookCoverSprite and adds it to the stage.
+ * @param book the book to create the sprite from.
+ * @param position the initial position of the book.
+ */
+async function createBookCover(book: Book, position: number): Promise<void> {
 	const sprite = new BookCoverSprite(book);
 	sprite.zIndex = 10;
+	sprite.x = 100 + (170 * position); // 100px is first book distance to viewport left. 170px is width of BookCoverSprite.
+	sprite.y = 450;
 	stage.addChild(sprite);
 }
 
@@ -43,9 +50,11 @@ async function setup(): Promise<void> {
 
 	stage.addChild(sprites.woodBackground);
 
-	PIXI.BitmapFont.from('Cote Font', {
-		fontFamily: 'Berlin Sans FB',
-		fontSize: 30
+	const books = await getBooks();
+
+	// load book covers
+	books.forEach((book, i) => {
+		createBookCover(book, i);
 	});
 }
 
@@ -55,15 +64,15 @@ async function setup(): Promise<void> {
 	loader
 		.add('woodBackground', '/images/games/sort/woodBackground.png')
 		.add('Berlin Sans FB', '/fonts/BerlinSansFB.ttf')
-		.load(setup);
-	console.log(loader);
+		.load(() => {
+			// setup BitmapFont
+			PIXI.BitmapFont.from('Cote Font', {
+				fontFamily: 'Berlin Sans FB',
+				fontSize: 30
+			});
 
-	const books = await getBooks();
-
-	// load book covers
-	books.forEach(book => {
-		createBookCover(book);
-	});
+			setup();
+		});
 })();
 
 // setup resize event
