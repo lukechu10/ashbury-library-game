@@ -57,6 +57,13 @@ export class BookCoverSprite extends PIXI.Sprite {
 		}).on('pointermove', () => {
 			if (dragging) {
 				const newPosition = data!.getLocalPosition(this.parent);
+				
+				// snap to woodBackground
+				const woodBackgroundYMiddle = 96 + (205 / 2); // y at 96 and height at 205
+				if (Math.abs(newPosition.y - woodBackgroundYMiddle) < 50) {
+					newPosition.y = woodBackgroundYMiddle - 10; // override y
+				}
+
 				this.position.set(newPosition.x, newPosition.y);
 			}
 		});
