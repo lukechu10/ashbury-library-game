@@ -17,7 +17,7 @@ const textures: any = {};
 const sprites: any = {};
 
 async function getBooks(): Promise<Book[]> {
-	const apiRes = await fetch(`${API_URL_BASE}/books/get?amount=3&bookType=dewey`);
+	const apiRes = await fetch(`${API_URL_BASE}/books/get?amount=3&bookType=alpha`);
 	const books: Book[] = await apiRes.json();
 
 	return books;

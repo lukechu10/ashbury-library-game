@@ -18,12 +18,28 @@ export class BookCoverSprite extends PIXI.Sprite {
 			this.addChild(bookCoverSprite);
 
 			// cote text
-			const coteText = new PIXI.Text(book.COTE, {
+			let cote: string;
+			{
+				const deweyPos = book.COTE.search(/[0-9]{3}/);
+				if (deweyPos !== -1) {
+					cote = book.COTE.substr(deweyPos, 3);
+				}
+				else {
+					const alphaPos = book.COTE.search(/[a-zA-Z]{3}/);
+					if (alphaPos !== -1) {
+						cote = book.COTE.substr(alphaPos);
+					}
+					else {
+						throw new Error('Invalid COTE');
+					}
+				}
+			}
+			const coteText = new PIXI.Text(cote, {
 				fontName: '35px Arial'
 			});
 			coteText.anchor.set(0.5, 0);
 			coteText.y = 150 / 2; // half of height of bookCoverSprite
-			
+
 			this.addChild(coteText);
 		})();
 
