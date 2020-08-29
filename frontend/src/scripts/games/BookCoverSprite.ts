@@ -66,15 +66,20 @@ export class BookCoverSprite extends PIXI.Sprite {
 			dragging = false;
 			this.zIndex = 10; // reset zIndex
 
-			// book is on shelf
+			// book position is on shelf
 			if (this.position.y - woodBackgroundYMiddle < 30) {
-				// only add book if not already on shelf
-				if (!sortState.shelvedBooks.includes(this)) {
-					sortState.shelvedBooks.push(this);
+				// remove book if already on shelf
+				if (sortState.shelvedBooks.includes(this)) {
+					sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
+					sortState.updateBookArrangement();
 				}
+				// add book to shelf state
+				const pos = Math.min(BookCoverSprite.closestBookPosition(this.position.x), sortState.shelvedBooks.length);
+				sortState.shelvedBooks.splice(pos, 0, this);
+
 				sortState.updateBookArrangement();
 			}
-			// remove book from shelf
+			// remove book from shelf state
 			else if (sortState.shelvedBooks.includes(this)) {
 				sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
 				sortState.updateBookArrangement();
@@ -92,5 +97,14 @@ export class BookCoverSprite extends PIXI.Sprite {
 				this.position.set(newPosition.x, newPosition.y);				
 			}
 		});
+	}
+
+	/**
+	 * @param xCoord the current coordinate of the book.
+	 * @returns the closest book position on the shelf.
+	 */
+	private static closestBookPosition(xCoord: number): number {
+		const position = Math.max(Math.round((xCoord - 100) / 170), 0);
+		return position;
 	}
 }
