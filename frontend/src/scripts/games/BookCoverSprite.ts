@@ -1,10 +1,12 @@
 import * as PIXI from 'pixi.js';
 import { API_URL_BASE } from '../constants';
+import { sortState } from './SortState';
+
+const woodBackgroundYMiddle = 96 + (205 / 2); // y at 96 and height at 205
 
 export class BookCoverSprite extends PIXI.Sprite {
 	public constructor(book: Book) {
 		super();
-
 		this.interactive = true;
 		this.anchor.set(0.5);
 
@@ -57,23 +59,37 @@ export class BookCoverSprite extends PIXI.Sprite {
 			data = event.data;
 			this.alpha = 0.5;
 			dragging = true;
+			this.zIndex = 11; // show above all other books
 		}).on('pointerup', () => {
 			data = null;
 			this.alpha = 1;
 			dragging = false;
+			this.zIndex = 10; // reset zIndex
+
+			// book is on shelf
+			if (this.position.y - woodBackgroundYMiddle < 30) {
+				this.position.x = 100 + (170 * sortState.shelvedBooks.length); // 100px is first book distance to viewport left. 170px is width of BookCoverSprite.
+				// only add book if not already on shelf
+				if (!sortState.shelvedBooks.includes(this)) {
+					sortState.shelvedBooks.push(this);
+				}
+			}
+			// remove book from shelf
+			else if (sortState.shelvedBooks.includes(this)) {
+				sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
+				sortState.updateBookArrangement();
+			}
 		}).on('pointermove', () => {
 			if (dragging) {
 				const newPosition = data!.getLocalPosition(this.parent);
 				
 				// snap to woodBackground
-				const woodBackgroundYMiddle = 96 + (205 / 2); // y at 96 and height at 205
 				if (newPosition.y - woodBackgroundYMiddle < 30) {
+					// position on shelf
 					newPosition.y = woodBackgroundYMiddle - 15; // override y
 				}
 
-				this.position.set(newPosition.x, newPosition.y);
-
-				
+				this.position.set(newPosition.x, newPosition.y);				
 			}
 		});
 	}

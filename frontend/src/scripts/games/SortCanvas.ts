@@ -18,7 +18,6 @@ export class SortCanvas extends PIXI.Application {
 			antialias: true
 		});
 
-		console.log('Created PIXI application: ', this);
 		this.renderer.backgroundColor = 0xffffff; // white
 
 		this.stage.sortableChildren = true;
@@ -92,3 +91,5 @@ export class SortCanvas extends PIXI.Application {
 		(this.sprites.woodBackground as PIXI.TilingSprite).width = window.innerWidth;
 	}
 }
+
+export const sortCanvasInstance = new SortCanvas();
