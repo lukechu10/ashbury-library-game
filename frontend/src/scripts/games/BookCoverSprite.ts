@@ -68,11 +68,11 @@ export class BookCoverSprite extends PIXI.Sprite {
 
 			// book is on shelf
 			if (this.position.y - woodBackgroundYMiddle < 30) {
-				this.position.x = 100 + (170 * sortState.shelvedBooks.length); // 100px is first book distance to viewport left. 170px is width of BookCoverSprite.
 				// only add book if not already on shelf
 				if (!sortState.shelvedBooks.includes(this)) {
 					sortState.shelvedBooks.push(this);
 				}
+				sortState.updateBookArrangement();
 			}
 			// remove book from shelf
 			else if (sortState.shelvedBooks.includes(this)) {
@@ -84,7 +84,7 @@ export class BookCoverSprite extends PIXI.Sprite {
 				const newPosition = data!.getLocalPosition(this.parent);
 				
 				// snap to woodBackground
-				if (newPosition.y - woodBackgroundYMiddle < 30) {
+				if (newPosition.y - woodBackgroundYMiddle < 50) {
 					// position on shelf
 					newPosition.y = woodBackgroundYMiddle - 15; // override y
 				}
