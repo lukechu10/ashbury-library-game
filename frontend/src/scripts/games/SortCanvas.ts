@@ -5,8 +5,12 @@ import { BookCoverSprite } from './BookCoverSprite';
 const loader = PIXI.Loader.shared;
 const resources = loader.resources;
 
+const view = document.querySelector<HTMLCanvasElement>('#sort-canvas')!;
 const app = new PIXI.Application({
-	view: document.querySelector<HTMLCanvasElement>('#sort-canvas')!
+	view,
+	resolution: 1,
+	width: window.innerWidth,
+	height: window.innerHeight
 });
 console.log('Created PIXI application: ', app);
 app.renderer.backgroundColor = 0xffffff; // white
@@ -52,3 +56,11 @@ async function setup(): Promise<void> {
 	// render book covers
 	loader.load(setup);
 })();
+
+// setup resize event
+window.addEventListener('resize', () => {
+	app.renderer.resize(window.innerWidth, window.innerHeight);
+
+	// resize woodBackground width
+	(sprites.woodBackground as PIXI.TilingSprite).width = window.innerWidth;
+});
