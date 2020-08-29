@@ -10,7 +10,8 @@ const app = new PIXI.Application({
 	view,
 	resolution: 1,
 	width: window.innerWidth,
-	height: window.innerHeight
+	height: window.innerHeight,
+	antialias: true
 });
 console.log('Created PIXI application: ', app);
 app.renderer.backgroundColor = 0xffffff; // white
