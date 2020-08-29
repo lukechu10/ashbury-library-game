@@ -7,7 +7,6 @@ class SortState {
 		this.shelvedBooks.forEach((book, i) => {
 			book.position.x = 100 + (170 * i); // 100px is first book distance to viewport left. 170px is width of BookCoverSprite.
 		});
-		console.log(this.shelvedBooks);
 	}
 }
 

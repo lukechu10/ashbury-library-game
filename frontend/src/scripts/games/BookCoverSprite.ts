@@ -67,7 +67,7 @@ export class BookCoverSprite extends PIXI.Sprite {
 			this.zIndex = 10; // reset zIndex
 
 			// book position is on shelf
-			if (this.position.y - woodBackgroundYMiddle < 30) {
+			if (this.position.y - woodBackgroundYMiddle < 50) {
 				// remove book if already on shelf
 				if (sortState.shelvedBooks.includes(this)) {
 					sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
@@ -92,9 +92,26 @@ export class BookCoverSprite extends PIXI.Sprite {
 				if (newPosition.y - woodBackgroundYMiddle < 50) {
 					// position on shelf
 					newPosition.y = woodBackgroundYMiddle - 15; // override y
+
+					// remove book if already on shelf
+					if (sortState.shelvedBooks.includes(this)) {
+						sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
+						sortState.updateBookArrangement();
+					}
+					// add book to shelf state
+					const pos = Math.min(BookCoverSprite.closestBookPosition(this.position.x), sortState.shelvedBooks.length);
+					sortState.shelvedBooks.splice(pos, 0, this);
+
+					sortState.updateBookArrangement();
+					
+				}
+				// remove ghost book from shelf state
+				else if (sortState.shelvedBooks.includes(this)) {
+					sortState.shelvedBooks = sortState.shelvedBooks.filter(book => book !== this);
+					sortState.updateBookArrangement();
 				}
 
-				this.position.set(newPosition.x, newPosition.y);				
+				this.position.set(newPosition.x, newPosition.y);
 			}
 		});
 	}
