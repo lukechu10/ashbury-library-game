@@ -14,14 +14,11 @@ export const enum BookType {
 export function getBookType(book: BookData): BookType{
 	const cote = book.COTE;
 
-	if (cote.search(/ [0-9]{3}/) !== -1) {
-		return BookType.DeweyDecimal;
-	}
-	else if (cote.search(/ [a-zA-Z]{3}/)) {
+	if (cote.search(/[0-9]{3}/) === -1) {
 		return BookType.Alpha;
 	}
 	else {
-		throw new Error(); // should be unreachable
+		return BookType.DeweyDecimal;
 	}
 }
 

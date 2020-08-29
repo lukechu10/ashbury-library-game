@@ -10,10 +10,21 @@ export class BookCoverSprite extends PIXI.Sprite {
 		this.position.set(100);
 
 		(async (): Promise<void> => {
+			// book
 			const imageUrl = `${API_URL_BASE}/books/imageProxy?imageUrl=${book.imageUrl}`; // get image through proxy to bypass cors
 			const bookCoverSprite = new PIXI.Sprite(await PIXI.Texture.fromURL(imageUrl));
 			bookCoverSprite.anchor.set(0.5);
+			bookCoverSprite.height = 150; // woodBackground height is 205px
 			this.addChild(bookCoverSprite);
+
+			// cote text
+			const coteText = new PIXI.Text(book.COTE, {
+				fontName: '35px Arial'
+			});
+			coteText.anchor.set(0.5, 0);
+			coteText.y = 150 / 2; // half of height of bookCoverSprite
+			
+			this.addChild(coteText);
 		})();
 
 		// attach events

@@ -13,7 +13,10 @@ function getImageUrl(book: BookData): Book {
 	if (imageData.match(/[0-9]{14,15}\.[a-z]*/)) { // e.g. 200804011130508.jpg
 		imageUrl = `${BASE_URL}A_${imageData.slice(0, 4)}/M_${imageData.slice(4, 6)}/${imageData}`;
 	}
-	else if (imageData.match(/[a-z0-9]{1,8}\.[a-z]*/)) { // e.g. 80116005.jpg or tob165.jpg
+	else if (imageData.match(/[a-zA-Z]{3}[0-9]{3,}\.[a-z]*/)) { // e.g tob165.jpg
+		imageUrl = `${BASE_URL}${imageData}`;
+	}
+	else if (imageData.match(/[0-9]{1,8}\.[a-z]*/)) { // e.g. 80116005.jpg
 		imageUrl = `${BASE_URL}F_${imageData.slice(0, 2)}/${imageData}`;
 	}
 	else if (imageData.match(/[0-9]+_[0-9]{4}-[0-9]{2}.*/)) { // e.g. 2_2012-06-18_10-46-37_.gif
