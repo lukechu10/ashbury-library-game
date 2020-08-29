@@ -41,10 +41,21 @@ async function setup(): Promise<void> {
 	sprites.woodBackground.zIndex = 1; // background
 
 	stage.addChild(sprites.woodBackground);
+
+	PIXI.BitmapFont.from('Cote Font', {
+		fontFamily: 'Berlin Sans FB',
+		fontSize: 30
+	});
 }
 
 (async (): Promise<void> => {
-	loader.add('woodBackground', '/images/games/sort/woodBackground.png');
+	PIXI.Loader.registerPlugin(new PIXI.BitmapFontLoader());
+
+	loader
+		.add('woodBackground', '/images/games/sort/woodBackground.png')
+		.add('Berlin Sans FB', '/fonts/BerlinSansFB.ttf')
+		.load(setup);
+	console.log(loader);
 
 	const books = await getBooks();
 
@@ -52,9 +63,6 @@ async function setup(): Promise<void> {
 	books.forEach(book => {
 		createBookCover(book);
 	});
-
-	// render book covers
-	loader.load(setup);
 })();
 
 // setup resize event

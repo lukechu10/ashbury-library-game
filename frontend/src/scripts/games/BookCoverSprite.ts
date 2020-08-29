@@ -34,10 +34,11 @@ export class BookCoverSprite extends PIXI.Sprite {
 					}
 				}
 			}
-			const coteText = new PIXI.Text(cote, {
-				fontName: '35px Arial'
+
+			const coteText = new PIXI.BitmapText(cote, {
+				fontName: 'Cote Font'
 			});
-			coteText.anchor.set(0.5, 0);
+			coteText.anchor = new PIXI.Point(0.5);
 			coteText.y = 150 / 2; // half of height of bookCoverSprite
 
 			this.addChild(coteText);

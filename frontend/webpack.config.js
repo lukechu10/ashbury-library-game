@@ -93,6 +93,11 @@ module.exports = {
 				{ from: 'src/images', to: 'images' }
 			]
 		}),
+		new CopyPlugin({
+			patterns: [
+				{ from: 'src/fonts', to: 'fonts' }
+			]
+		}),
 		new MiniCssExtractPlugin()
 	],
 	devServer: {
