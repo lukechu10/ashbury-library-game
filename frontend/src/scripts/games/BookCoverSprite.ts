@@ -5,6 +5,8 @@ import { sortState } from './SortState';
 const woodBackgroundYMiddle = 96 + (205 / 2); // y at 96 and height at 205
 
 export class BookCoverSprite extends PIXI.Sprite {
+	public cote = '';
+
 	public constructor(book: Book) {
 		super();
 		this.interactive = true;
@@ -19,24 +21,21 @@ export class BookCoverSprite extends PIXI.Sprite {
 			this.addChild(coteTextBackground);
 
 			// cote text
-			let cote: string;
-			{
-				const deweyPos = book.COTE.search(/[0-9]{3}/);
-				if (deweyPos !== -1) {
-					cote = book.COTE.substr(deweyPos, 3);
+			const deweyPos = book.COTE.search(/[0-9]{3}/);
+			if (deweyPos !== -1) {
+				this.cote = book.COTE.substr(deweyPos, 3);
+			}
+			else {
+				const alphaPos = book.COTE.search(/ [a-zA-Z]{1,}/);
+				if (alphaPos !== -1) {
+					this.cote = book.COTE.substr(alphaPos);
 				}
 				else {
-					const alphaPos = book.COTE.search(/ [a-zA-Z]{1,}/);
-					if (alphaPos !== -1) {
-						cote = book.COTE.substr(alphaPos);
-					}
-					else {
-						throw new Error('Invalid COTE');
-					}
+					throw new Error('Invalid COTE');
 				}
 			}
 
-			const coteText = new PIXI.BitmapText(cote, {
+			const coteText = new PIXI.BitmapText(this.cote, {
 				fontName: 'Cote Font'
 			});
 			coteText.anchor = new PIXI.Point(0.5);

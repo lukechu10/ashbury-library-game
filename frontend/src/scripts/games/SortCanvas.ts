@@ -23,7 +23,7 @@ export class SortCanvas extends PIXI.Application {
 		this.stage.sortableChildren = true;
 		
 		// setup resize event
-		window.addEventListener('resize', this.resizeHandler);
+		window.addEventListener('resize', () => { this.resizeHandler(); });
 
 		(async (): Promise<void> => {
 			PIXI.Loader.registerPlugin(new PIXI.BitmapFontLoader());
@@ -91,5 +91,3 @@ export class SortCanvas extends PIXI.Application {
 		(this.sprites.woodBackground as PIXI.TilingSprite).width = window.innerWidth;
 	}
 }
-
-export const sortCanvasInstance = new SortCanvas();

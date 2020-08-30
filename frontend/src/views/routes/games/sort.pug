@@ -2,8 +2,8 @@ extends ../../layout
 
 block content
     header
-        span#time-counter Temps: ...
-        span#score-counter Score: 0
+        span#time-counter Temps: 0s
+        span#score-counter Score: 100
     canvas#sort-canvas(style="width: 100vw; height: 100vh;")
-    a#validate-btn.btn.btn-primary(href='/')
+    button#validate-btn.btn.btn-primary
         p Valider

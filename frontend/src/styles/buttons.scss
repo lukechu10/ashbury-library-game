@@ -1,8 +1,12 @@
 :root {
 	--color-button: rgb(83, 94, 168);
+	--color-button-error: rgb(214, 66, 36);
+	--color-button-success: rgb(45, 189, 79);
 }
 
 .btn {
+	font-family: var(--default-font-family);
+
 	border: solid var(--color-button) 3px;
 	border-radius: 5px;
 
@@ -15,6 +19,8 @@
 	text-decoration-line: none; // override default link style
 
 	box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+
+	transition-duration: 200ms;
 	
 	&-primary {
 		background-color: var(--color-button);
@@ -24,6 +30,16 @@
 	&-secondary {
 		background-color: transparent;
 		color: var(--color-button);
+	}
+
+	&-error {
+		background-color: var(--color-button-error);
+		border-color: var(--color-button-error);
+	}
+
+	&-success {
+		background-color: var(--color-button-success);
+		border-color: var(--color-button-success);
 	}
 
 	// circular button with back icon
