@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "description": "",
     "main": "dist/index.bundle.js",
+    "engines": {
+        "node": "12.x"
+    },
     "scripts": {
         "watch": "webpack --watch --mode development",
         "prod": "webpack --mode production",

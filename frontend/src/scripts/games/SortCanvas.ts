@@ -46,7 +46,7 @@ export class SortCanvas extends PIXI.Application {
 	private async getBooks(): Promise<Book[]> {
 		const apiRes = await fetch(`${API_URL_BASE}/books/get?amount=5&bookType=alpha`);
 		const books: Book[] = await apiRes.json();
-	
+		
 		return books;
 	}
 
