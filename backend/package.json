@@ -8,7 +8,7 @@
     },
     "scripts": {
         "watch": "webpack --watch --mode development",
-        "prod": "webpack --mode production",
+        "build": "webpack --mode production",
         "start": "node .",
         "dev": "concurrently --names webpack,nodemon --prefix-colors gray,blue \"webpack --watch --mode development\" \"nodemon .\""
     },

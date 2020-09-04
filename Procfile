@@ -1,2 +1,2 @@
-release: cd backend && yarn prod
-web: cd backend && yarn start
+release: yarn workspace ashbury-library-game-backend build
+web: yarn workspace ashbury-library-game-backend start
