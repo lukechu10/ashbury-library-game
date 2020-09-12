@@ -9,9 +9,9 @@ export class SortCanvas extends PIXI.Application {
 	private sprites: any = {};
 	private textures: any = {};
 
-	public constructor() {
+	public constructor(view: HTMLCanvasElement) {
 		super({
-			view: document.querySelector<HTMLCanvasElement>('#sort-canvas')!,
+			view,
 			resolution: 1,
 			width: window.innerWidth,
 			height: window.innerHeight,
