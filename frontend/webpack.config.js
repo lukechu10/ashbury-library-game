@@ -8,6 +8,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const webpack = require('webpack');
 
 function HtmlTemplateFactory(templatePath, chunks) {
 	return new HtmlWebpackPlugin({
@@ -19,7 +20,7 @@ function HtmlTemplateFactory(templatePath, chunks) {
 	});
 }
 
-module.exports = {
+module.exports = (env, argv) => ({
 	context: __dirname,
 	entry: {
 		global: './src/global.ts', // included in all views
@@ -98,7 +99,12 @@ module.exports = {
 				{ from: 'src/fonts', to: 'fonts' }
 			]
 		}),
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin(),
+		new webpack.DefinePlugin({
+			'process.env': {
+				PRODUCTION: JSON.stringify(argv.mode === 'production'),
+			}
+		})
 	],
 	devServer: {
 		contentBase: path.join(__dirname, 'dist'),
@@ -131,4 +137,4 @@ module.exports = {
 			}
 		}
 	}
-};
+});

@@ -1,7 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { API_URL_BASE } from '../constants';
 import { BookCoverSprite } from './BookCoverSprite';
-
 export const loader = PIXI.Loader.shared;
 export const resources = loader.resources;
 
