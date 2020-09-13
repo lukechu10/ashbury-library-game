@@ -7,7 +7,7 @@
     "clean": "rm dist/",
     "test": "jest",
     "dev": "webpack-dev-server",
-    "prod": "webpack --mode production",
+    "build": "webpack --mode production",
     "lint": "eslint src/ --ext .ts,.tsx",
     "lint:fix": "eslint src/ --ext .ts,.tsx --fix"
   },

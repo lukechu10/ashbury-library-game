@@ -1,4 +1,4 @@
-import { chromium, Browser, Page } from "playwright";
+import { chromium, Browser, Page } from 'playwright';
 let browser: Browser;
 let page: Page;
 

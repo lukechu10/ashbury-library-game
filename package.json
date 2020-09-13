@@ -10,6 +10,12 @@
     },
     "author": "",
     "license": "ISC",
+    "scripts": {
+        "build": "yarn workspace ashbury-library-game-backend build",
+        "start": "yarn workspace ashbury-library-game-backend start",
+        "build-frontend": "yarn workspace ashbury-library-game build",
+        "start-frontend": "yarn workspace ashbury-library-game start"
+    },
     "bugs": {
         "url": "https://github.com/lukechu10/ashbury-library-game/issues"
     },

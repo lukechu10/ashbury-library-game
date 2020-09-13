@@ -3,12 +3,26 @@ import '../../styles/games/sort.scss';
 import { SortCanvas } from './SortCanvas';
 import { sortState } from './SortState';
 
+const difficulties = [
+	{
+		bookCount: 3, modes: ['alpha', 'dewey']
+	},
+	{
+		bookCount: 4, modes: ['alpha', 'dewey', 'alpha']
+	},
+	{
+		bookCount: 5, modes: ['alpha', 'dewey', 'alpha', 'dewey']
+	}
+];
+
 @customElement('sort-game-container')
 export class SortGameContainer extends LitElement {
 	protected createRenderRoot(): this { return this;}
 
 	private score = 100;
 	private timeMillis = 0;
+
+	private selectedDifficulty = difficulties[2];
 
 	@query('#sort-canvas') private sortCanvas!: HTMLCanvasElement;
 	@query('#validate-btn') private validateBtn!: HTMLButtonElement;
@@ -41,7 +55,8 @@ export class SortGameContainer extends LitElement {
 			this.validateBtn.classList.add('btn-success');
 
 			setTimeout(() => {
-				location.href = '/'; // navigate to home
+				// load next config
+				new SortCanvas(this.sortCanvas);
 			}, 1000);
 		}
 		else {
