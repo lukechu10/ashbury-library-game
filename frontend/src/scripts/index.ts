@@ -1,8 +1,6 @@
 // entrypoint for index.html
 
-// styles
-import '../styles/index.scss';
+import '../styles/index.scss'; // styles
+import { API_URL_BASE } from './constants';
 
-// Opt-in to Webpack hot module replacement
-// @ts-expect-error
-if (module.hot) module.hot.accept();
+fetch(API_URL_BASE); // ping url base to wake up heroku server
