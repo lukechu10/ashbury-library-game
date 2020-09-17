@@ -2,8 +2,8 @@ import cors from '@koa/cors';
 import Router from '@koa/router';
 import Koa from 'koa';
 import logger from 'koa-logger';
-import { router as booksMiddleware } from './routes/books';
 import { router as bookCoverProxyMiddleware } from './routes/bookCoverProxy';
+import { router as booksMiddleware } from './routes/books';
 
 const app = new Koa();
 const router = new Router();

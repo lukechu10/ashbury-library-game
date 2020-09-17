@@ -1,12 +1,9 @@
 // included in all views
 
-// global styles
-import './styles/global.scss';
-// turbolinks
-import * as Turbolinks from 'turbolinks';
-// polyfills
+import '@webcomponents/webcomponentsjs'; // shadydom and shadycss polyfills
+// import * as Turbolinks from 'turbolinks'; // turbolinks spa application
 import 'whatwg-fetch'; // window.fetch
-import '@webcomponents/webcomponentsjs'; // shadydom and shadycss
+import './styles/global.scss'; // global styles
 
 // Turbolinks.start();
 
