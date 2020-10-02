@@ -1,4 +1,3 @@
-import Router from '@koa/router';
 import { router } from './books';
 import got from 'got';
 

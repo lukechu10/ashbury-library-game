@@ -14,7 +14,9 @@
         "build": "yarn workspace ashbury-library-game-backend build",
         "start": "yarn workspace ashbury-library-game-backend start",
         "build-frontend": "yarn workspace ashbury-library-game build",
-        "dev-frontend": "yarn workspace ashbury-library-game dev"
+        "dev-frontend": "yarn workspace ashbury-library-game dev",
+        "lint": "eslint backend/src/ frontend/src/ --ext .ts,.tsx",
+        "lint:fix": "eslint backend/src/ frontend/src/ --ext .ts,.tsx --fix"
     },
     "bugs": {
         "url": "https://github.com/lukechu10/ashbury-library-game/issues"

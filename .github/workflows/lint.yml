@@ -29,6 +29,6 @@ jobs:
         check-latest: true
     
     # Run eslint command with npm
-    - run: npm run lint
+    - run: yarn lint
       
     
