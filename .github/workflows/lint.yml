@@ -27,8 +27,10 @@ jobs:
         node-version: 12.x
         # Set this option if you want the action to check for the latest available version that satisfies the version spec
         check-latest: true
+    # Install dependencies
+    - run: yarn
     
-    # Run eslint command with npm
+    # Run eslint command with yarn
     - run: yarn lint
       
     
