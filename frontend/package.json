@@ -24,7 +24,7 @@
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^4.3.0",
     "eslint": "^7.6.0",
-    "file-loader": "^6.0.0",
+    "file-loader": "^6.1.0",
     "fork-ts-checker-webpack-plugin": "^5.2.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.2.2",
