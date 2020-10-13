@@ -16,7 +16,7 @@
     "whatwg-fetch": "^3.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.8",
+    "@types/jest": "^26.0.14",
     "@types/turbolinks": "^5.2.0",
     "@typescript-eslint/eslint-plugin": "^3.9.0",
     "@typescript-eslint/parser": "^3.9.0",
