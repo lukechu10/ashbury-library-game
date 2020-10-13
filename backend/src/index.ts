@@ -12,6 +12,10 @@ router
 	.use('/books/', booksMiddleware.routes())
 	.use('/books/', bookCoverProxyMiddleware.routes());
 
+router.get('/ping/', async ctx => {
+	ctx.body = "pong";
+});
+
 app
 	.use(cors({origin: '*'}))
 	.use(logger())
